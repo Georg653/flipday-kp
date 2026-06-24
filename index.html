@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlipDay — Коммерческое предложение</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F4FF;
+    --bg-soft: #FFFFFF;
+    --bg-tint: #EFEBFF;
+    --purple: #5B47E0;
+    --purple-dark: #3D2BB8;
+    --purple-bright: #7A66FF;
+    --purple-soft: #E5DFFF;
+    --blue: #3D7BFF;
+    --blue-light: #6FA0FF;
+    --blue-soft: #DCE7FF;
+    --sky: #B5D4FF;
+    --ink: #0E0A2A;
+    --text: #1F1B40;
+    --text-mute: #6B6890;
+    --line: rgba(91, 71, 224, 0.14);
+    --line-strong: rgba(91, 71, 224, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Onest', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    scroll-padding-top: 72px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 8% 12%, rgba(122, 102, 255, 0.18), transparent 40%),
+      radial-gradient(circle at 92% 5%, rgba(61, 123, 255, 0.14), transparent 38%),
+      radial-gradient(circle at 80% 95%, rgba(91, 71, 224, 0.10), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 48px 32px 96px;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 56px;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand-logo {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(91, 71, 224, 0.28);
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+  .brand-name {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .brand-tag {
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .doc-meta strong {
+    display: block;
+    color: var(--purple);
+    font-weight: 600;
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero { margin-bottom: 88px; position: relative; }
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: var(--purple-soft);
+    border: 1px solid rgba(91, 71, 224, 0.2);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--purple);
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+  }
+  .hero-label::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--purple);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--purple-bright);
+  }
+  .hero-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero-title .accent {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--text-mute);
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hero-tag {
+    padding: 8px 16px;
+    border: 1px solid var(--line-strong);
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--bg-soft);
+    font-weight: 500;
+  }
+
+  .section { margin-bottom: 80px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+  .section-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--purple);
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 42px);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+
+  /* AUDIENCE STATS */
+  .audience-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .audience-big {
+    background: linear-gradient(155deg, #5B47E0 0%, #3D2BB8 100%);
+    border-radius: 28px;
+    padding: 40px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(91,71,224,0.22);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .audience-big::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .audience-big::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(61,123,255,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .audience-big > * { position: relative; z-index: 2; }
+  .aud-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 12px;
+  }
+  .aud-big-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: 16px;
+  }
+  .aud-big-label {
+    font-size: 16px;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.5;
+    max-width: 280px;
+  }
+
+  .audience-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-content: start;
+  }
+  .stat-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 24px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--purple-soft), transparent 70%);
+  }
+  .stat-card:nth-child(2)::after { background: radial-gradient(circle, var(--blue-soft), transparent 70%); }
+  .stat-card:nth-child(3)::after { background: radial-gradient(circle, var(--blue-soft), transparent 70%); }
+  .stat-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative; z-index: 2;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-mute);
+    line-height: 1.4;
+    position: relative; z-index: 2;
+  }
+  .stat-period {
+    font-size: 11px;
+    color: var(--purple);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    position: relative; z-index: 2;
+  }
+
+  .audience-note {
+    margin-top: 18px;
+    padding: 22px 28px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    font-size: 15px;
+    color: var(--text-mute);
+    line-height: 1.6;
+    grid-column: 1 / -1;
+  }
+  .audience-note strong { color: var(--ink); }
+
+  /* PACKAGES */
+  .packages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .pkg {
+    position: relative;
+    padding: 40px;
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .pkg-main {
+    background: linear-gradient(155deg, #5B47E0 0%, #4530B5 60%, #3D2BB8 100%);
+    color: var(--bg-soft);
+    box-shadow: 0 24px 60px rgba(91, 71, 224, 0.28);
+  }
+  .pkg-main::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .pkg-main::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -60px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(122, 102, 255, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .pkg-light {
+    background: var(--bg-soft);
+    border: 1px solid var(--line-strong);
+  }
+  .pkg-light::before {
+    content: '';
+    position: absolute;
+    bottom: -120px; right: -100px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, var(--blue-soft) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+  .pkg-light::after {
+    content: '';
+    position: absolute;
+    top: -80px; left: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--purple-soft) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .pkg > * { position: relative; z-index: 2; }
+
+  .pkg-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border-radius: 100px;
+    margin-bottom: 22px;
+    align-self: flex-start;
+  }
+  .pkg-main .pkg-tag {
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--bg-soft);
+  }
+  .pkg-light .pkg-tag {
+    background: var(--blue-soft);
+    color: var(--blue);
+  }
+  .pkg-name {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .pkg-light .pkg-name { color: var(--ink); }
+  .pkg-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .pkg-main .pkg-desc { color: rgba(255, 255, 255, 0.82); }
+  .pkg-light .pkg-desc { color: var(--text-mute); }
+
+  .pkg-bullets {
+    list-style: none;
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .pkg-bullets li {
+    position: relative;
+    padding-left: 30px;
+    font-size: 14px;
+    line-height: 1.5;
+    background-repeat: no-repeat;
+    background-position: 0 2px;
+    background-size: 18px 18px;
+  }
+  .pkg-main .pkg-bullets li {
+    color: rgba(255, 255, 255, 0.92);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Ccircle cx='9' cy='9' r='9' fill='white'/%3E%3Cpath d='M5.5 9L8 11.5L12.5 7' stroke='%235B47E0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  }
+  .pkg-light .pkg-bullets li {
+    color: var(--text);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237A66FF'/%3E%3Cstop offset='1' stop-color='%233D7BFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='9' cy='9' r='9' fill='url(%23g)'/%3E%3Cpath d='M5.5 9L8 11.5L12.5 7' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  }
+
+  .pkg-price {
+    margin-top: auto;
+    padding-top: 24px;
+    display: flex;
+    align-items: stretch;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .pkg-main .pkg-price { border-top: 1px dashed rgba(255, 255, 255, 0.25); }
+  .pkg-light .pkg-price { border-top: 1px dashed var(--line-strong); }
+  .price-base {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .price-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .pkg-main .price-num { color: var(--bg-soft); }
+  .pkg-light .price-num {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .price-currency {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+  }
+  .pkg-main .price-currency { color: rgba(255, 255, 255, 0.6); }
+  .pkg-light .price-currency { color: var(--text-mute); }
+
+  .price-addon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 22px;
+    border-left: 2px dotted rgba(255, 255, 255, 0.3);
+    gap: 4px;
+  }
+  .price-addon-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: var(--bg-soft);
+    line-height: 1;
+  }
+  .price-addon-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  /* INCLUDED */
+  .included {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .inc-item {
+    display: flex;
+    gap: 18px;
+    padding: 26px 28px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+  .inc-item:hover {
+    border-color: rgba(91, 71, 224, 0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(91, 71, 224, 0.10);
+  }
+  .inc-icon {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-soft);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .inc-item:nth-child(2) .inc-icon { background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%); }
+  .inc-item:nth-child(3) .inc-icon { background: linear-gradient(135deg, var(--purple-bright) 0%, var(--purple) 100%); }
+  .inc-item:nth-child(4) .inc-icon { background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue) 100%); }
+  .inc-item:nth-child(5) .inc-icon { background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%); }
+  .inc-text h4 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .inc-text p {
+    font-size: 14px;
+    color: var(--text-mute);
+    line-height: 1.55;
+  }
+
+  /* TERMS */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .term {
+    padding: 32px 28px;
+    border-radius: 22px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .term::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+  .term:nth-child(1)::before { background: radial-gradient(circle, var(--purple-soft), transparent 70%); }
+  .term:nth-child(2)::before { background: radial-gradient(circle, var(--blue-soft), transparent 70%); }
+  .term:nth-child(3)::before { background: radial-gradient(circle, var(--purple-soft), transparent 70%); }
+  .term > * { position: relative; z-index: 2; }
+  .term-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .term:nth-child(2) .term-num {
+    font-size: 32px;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .term h4 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .term p {
+    font-size: 14px;
+    color: var(--text-mute);
+    line-height: 1.55;
+  }
+
+  /* PORTFOLIO */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .portfolio-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .portfolio-card:hover {
+    border-color: rgba(91, 71, 224, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(91, 71, 224, 0.12);
+  }
+  .portfolio-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, var(--purple-soft) 0%, var(--blue-soft) 100%);
+  }
+  .portfolio-img-placeholder {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--purple-soft) 0%, var(--blue-soft) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+  .portfolio-body {
+    padding: 28px;
+  }
+  .portfolio-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .portfolio-collab {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--purple);
+    background: var(--purple-soft);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+  .portfolio-date {
+    font-size: 12px;
+    color: var(--text-mute);
+  }
+  .portfolio-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .portfolio-desc {
+    font-size: 14px;
+    color: var(--text-mute);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .portfolio-stats {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .p-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .p-stat-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .p-stat-label {
+    font-size: 11px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .portfolio-format-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: var(--blue-soft);
+    color: var(--blue);
+    margin-bottom: 10px;
+  }
+
+  .portfolio-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid rgba(91, 71, 224, 0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .portfolio-link:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+  }
+
+  /* EXPANDABLE EXAMPLES */
+  .examples-toggle {
+    color: var(--blue);
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 1px dashed var(--blue);
+    white-space: nowrap;
+  }
+  .examples-body {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 13px;
+    color: var(--text-mute);
+    line-height: 1.6;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 0 0 0;
+    border-left: 3px solid var(--blue-soft);
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  .examples-body.open {
+    max-height: 120px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+  }
+
+  /* CONTACT */
+  .contact {
+    margin-top: 96px;
+    padding: 64px 56px;
+    background: linear-gradient(135deg, #5B47E0 0%, #3D2BB8 60%, #2D1F8C 100%);
+    border-radius: 36px;
+    color: var(--bg-soft);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(91, 71, 224, 0.32);
+  }
+  .contact::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(122, 102, 255, 0.5) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .contact::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(61, 123, 255, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .contact > * { position: relative; z-index: 2; }
+  .contact-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 18px;
+  }
+  .contact-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 56px);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 18px;
+  }
+  .contact-sub {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.55;
+    margin-bottom: 36px;
+    max-width: 540px;
+  }
+  .contact-buttons { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 28px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+  .btn-primary {
+    background: var(--bg-soft);
+    color: var(--purple);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  }
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--bg-soft);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(10px);
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .foot {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* STICKY HEADER */
+  .sticky-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 32px;
+    height: 64px;
+    background: rgba(246, 244, 255, 0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+  .sticky-header.visible {
+    transform: translateY(0);
+  }
+  .sticky-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sticky-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sticky-logo {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    object-fit: contain;
+    box-shadow: 0 4px 12px rgba(91,71,224,0.2);
+  }
+  .sticky-name {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .sticky-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--purple);
+    color: #fff;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(91,71,224,0.28);
+  }
+  .sticky-cta:hover {
+    background: var(--purple-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(91,71,224,0.36);
+  }
+
+  @media (max-width: 860px) {
+    .wrap { padding: 28px 20px 64px; }
+    .topbar { margin-bottom: 36px; padding-bottom: 20px; }
+    .doc-meta { display: none; }
+    .hero { margin-bottom: 56px; }
+    .section { margin-bottom: 48px; }
+    .packages { grid-template-columns: 1fr; }
+    .included { grid-template-columns: 1fr; }
+    .terms-grid { grid-template-columns: 1fr; }
+    .audience-wrap { grid-template-columns: 1fr; }
+    .audience-stats { grid-template-columns: 1fr 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .pkg { padding: 28px 22px; }
+    .price-num { font-size: 44px; }
+    .price-addon { padding-left: 16px; }
+    .contact { padding: 36px 24px; margin-top: 56px; }
+    .foot { flex-direction: column; gap: 12px; }
+    .aud-big-num { font-size: 72px; }
+
+    .section-head {
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .section-num { font-size: 11px; }
+    .section-title { font-size: 26px; }
+    .hero-title { font-size: 42px; letter-spacing: -0.03em; }
+    .contact-title { font-size: 28px; }
+    .sticky-header { padding: 0 20px; height: 56px; }
+    .sticky-name { font-size: 14px; }
+    .sticky-cta { padding: 8px 16px; font-size: 12px; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero, .section, .contact { animation: fadeUp 0.7s ease backwards; }
+  .section:nth-of-type(1) { animation-delay: 0.1s; }
+  .section:nth-of-type(2) { animation-delay: 0.2s; }
+  .section:nth-of-type(3) { animation-delay: 0.3s; }
+  .section:nth-of-type(4) { animation-delay: 0.4s; }
+  .section:nth-of-type(5) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- STICKY HEADER -->
+<header class="sticky-header" id="stickyHeader">
+  <div class="sticky-inner">
+    <div class="sticky-brand">
+      <img src="favicon.ico" alt="FlipDay" class="sticky-logo">
+      <span class="sticky-name">FlipDay</span>
+    </div>
+    <a href="https://t.me/GEORG653" class="sticky-cta" target="_blank">Написать →</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <img src="favicon.ico" alt="FlipDay" class="brand-logo">
+      <div>
+        <div class="brand-name">FlipDay</div>
+        <div class="brand-tag">TikTok @fllipday · t.me/Flip_Day</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      Коммерческое<br>предложение
+      <strong>2026</strong>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-label">Открыты к сотрудничеству</div>
+    <h1 class="hero-title">
+      Расскажем<br>
+      о вашем месте<br>
+      <span class="accent">всему Минску.</span>
+    </h1>
+    <p class="hero-sub">
+      Мы делаем обзоры заведений, мест и событий в Беларуси.
+      Подборки, рекомендации, личные впечатления — формат, который зрители смотрят
+      и сохраняют, а потом приходят к вам.
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">Кафе и рестораны</span>
+      <span class="hero-tag">Развлечения</span>
+      <span class="hero-tag">События</span>
+      <span class="hero-tag">Подборки мест</span>
+      <span class="hero-tag">Минск и регионы</span>
+    </div>
+  </div>
+
+  <!-- AUDIENCE -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">01 / АУДИТОРИЯ</div>
+      <h2 class="section-title">Живая аудитория</h2>
+    </div>
+    <div class="audience-wrap">
+      <div class="audience-big">
+        <div class="aud-eyebrow">Беларусь · 🇧🇾</div>
+        <div class="aud-big-num">95%</div>
+        <div class="aud-big-label">наших зрителей — белорусы. Люди, которые реально могут прийти к вам завтра.</div>
+      </div>
+      <div class="audience-stats">
+        <div class="stat-card">
+          <div class="stat-num">799K</div>
+          <div class="stat-label">просмотров публикаций</div>
+          <div class="stat-period">за 28 дней</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">28K</div>
+          <div class="stat-label">лайков на контенте</div>
+          <div class="stat-period">за 28 дней</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">9 800</div>
+          <div class="stat-label">репостов — люди делятся с друзьями</div>
+          <div class="stat-period">за 28 дней</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">182K</div>
+          <div class="stat-label">просмотров только за последнюю неделю</div>
+          <div class="stat-period">+64.8% рост</div>
+        </div>
+      </div>
+      <div class="audience-note">
+        Цифры выше — это не накрученные показы, а реальные живые люди. Высокий процент репостов и сохранений говорит о том, что аудитория не просто листает ленту — она <strong>действительно интересуется местами и делится ими</strong> с окружением.
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMATS -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">02 / ФОРМАТЫ СОТРУДНИЧЕСТВА</div>
+      <h2 class="section-title">Выберите формат</h2>
+    </div>
+    <div class="packages">
+
+      <div class="pkg pkg-main">
+        <span class="pkg-tag">Полный обзор</span>
+        <h3 class="pkg-name">Видео-обзор<br>вашего места</h3>
+        <p class="pkg-desc">
+          Полноценный ролик с моим участием в кадре. Приезжаем, снимаем атмосферу,
+          рассказываем о вас, показываем фишки. Авторская подача и узнаваемый стиль.
+        </p>
+        <ul class="pkg-bullets">
+          <li>Выезд на локацию и съёмка</li>
+          <li>Профессиональный монтаж</li>
+          <li>Публикация в TikTok @fllipday</li>
+          <li>Стильная обложка и адрес места</li>
+        </ul>
+        <div class="pkg-price">
+          <div class="price-base">
+            <span class="price-num">200</span>
+            <span class="price-currency">BYN</span>
+          </div>
+          <div class="price-addon">
+            <span class="price-addon-num">+ 70 BYN</span>
+            <span class="price-addon-label">добавление в подборки<br>(по желанию)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pkg pkg-light">
+        <span class="pkg-tag">Без выезда</span>
+        <h3 class="pkg-name">Только в подборки</h3>
+        <p class="pkg-desc">
+          Ваше место попадёт сразу в несколько разных тематических подборок — каждая со своей аудиторией и настроением. <span class="examples-toggle" onclick="this.closest('.pkg').querySelector('.examples-body').classList.toggle('open')">подробнее ↓</span>
+        </p>
+        <div class="examples-body">
+          Одно и то же место может попасть одновременно в «Лучшие места для отдыха», «Необычный отдых в Минске» и «Кафе в нестандартном стиле» — три разных повода для трёх разных людей.
+        </div>
+        <ul class="pkg-bullets">
+          <li>3 подборки на разные темы</li>
+          <li>Адрес и упоминание места</li>
+          <li>Подборки выходят регулярно</li>
+          <li>Гарантированное включение</li>
+        </ul>
+        <div class="pkg-price">
+          <div class="price-base">
+            <span class="price-num">100</span>
+            <span class="price-currency">BYN</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INCLUDED -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">03 / ВХОДИТ В РАБОТУ</div>
+      <h2 class="section-title">Что вы получаете</h2>
+    </div>
+    <div class="included">
+      <div class="inc-item">
+        <div class="inc-icon">→</div>
+        <div class="inc-text">
+          <h4>Выезд и съёмка</h4>
+          <p>Приезжаем на вашу локацию в удобное время, снимаем интерьер, атмосферу и продукт</p>
+        </div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-icon">✎</div>
+        <div class="inc-text">
+          <h4>Авторский сценарий</h4>
+          <p>Подаём ваше место в нашем стиле — без шаблонов и постановочных текстов</p>
+        </div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-icon">▶</div>
+        <div class="inc-text">
+          <h4>Монтаж и публикация</h4>
+          <p>Профессиональный монтаж и публикация на основной странице FlipDay в TikTok</p>
+        </div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-icon">★</div>
+        <div class="inc-text">
+          <h4>Стильная обложка</h4>
+          <p>Узнаваемая обложка в фирменном стиле канала — повышает кликабельность</p>
+        </div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-icon">◎</div>
+        <div class="inc-text">
+          <h4>Адрес и упоминания</h4>
+          <p>Адрес вашего места, упоминание в описании и закреплённый комментарий</p>
+        </div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-icon">↗</div>
+        <div class="inc-text">
+          <h4>Право на использование</h4>
+          <p>Готовое видео можете публиковать у себя на странице с указанием авторства</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERMS -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">04 / УСЛОВИЯ</div>
+      <h2 class="section-title">Как мы работаем</h2>
+    </div>
+    <div class="terms-grid">
+      <div class="term">
+        <div class="term-num">2–7</div>
+        <h4>Сроки публикации</h4>
+        <p>Публикуем готовый ролик в течение 2–7 дней после съёмки на локации</p>
+      </div>
+      <div class="term">
+        <div class="term-num">МИНСК+</div>
+        <h4>География</h4>
+        <p>Работаем по Минску и выезжаем в регионы Беларуси — локация согласовывается заранее</p>
+      </div>
+      <div class="term">
+        <div class="term-num">★</div>
+        <h4>Пожелания — по желанию</h4>
+        <p>Если хотите чтобы мы упомянули что-то конкретное — напишите. Без пожеланий тоже снимем отлично</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">05 / ПОРТФОЛИО</div>
+      <h2 class="section-title">Наши кейсы</h2>
+    </div>
+    <div class="portfolio-grid">
+
+      <!-- Hero Park -->
+      <div class="portfolio-card">
+        <img src="hero_park.jpg" alt="Hero Park x FlipDay" class="portfolio-img">
+        <div class="portfolio-body">
+          <div class="portfolio-meta">
+            <span class="portfolio-collab">Коллаборация</span>
+            <span class="portfolio-date">Лето 2024</span>
+          </div>
+          <div class="portfolio-title">FlipDay × Hero Park</div>
+          <div class="portfolio-desc">
+            Договорились с Hero Park и получили эксклюзивный промокод FLIPDAY — скидка 50% на билеты в будний день. Аудитория отреагировала мгновенно: репосты разлетелись по чатам и историям.
+          </div>
+        </div>
+      </div>
+
+      <!-- The Пиво -->
+      <div class="portfolio-card">
+        <img src="the_pivo.jpg" alt="The Пиво x FlipDay" class="portfolio-img">
+        <div class="portfolio-body">
+          <div class="portfolio-meta">
+            <span class="portfolio-collab">Коллаборация</span>
+            <span class="portfolio-date">Ноябрь–Январь 2025</span>
+          </div>
+          <div class="portfolio-title">FlipDay × The Пиво</div>
+          <div class="portfolio-desc">
+            Коллаборация с одним из самых ламповых баров Минска. Промокод FlipDay давал скидку 5% — аудитория получила повод зайти, бар получил новых гостей.
+          </div>
+        </div>
+      </div>
+
+      <!-- Mian ресторан -->
+      <div class="portfolio-card">
+        <img src="mian.jpg" alt="Ресторан Mian" class="portfolio-img">
+        <div class="portfolio-body">
+          <div class="portfolio-meta">
+            <span class="portfolio-collab" style="background: var(--blue-soft); color: var(--blue);">Рекламный ролик</span>
+            <span class="portfolio-date">2024</span>
+          </div>
+          <div class="portfolio-title">Ресторан Mian — киновечера</div>
+          <div class="portfolio-desc">
+            Рекламный ролик про кино-вечера с китайской лапшой. Видео набрало впечатляющую органику — аудитория сама распространяла контент, потому что формат зашёл.
+          </div>
+          <div class="portfolio-stats">
+            <div class="p-stat">
+              <span class="p-stat-num">52K</span>
+              <span class="p-stat-label">просмотров</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-num">2,4K</span>
+              <span class="p-stat-label">лайков</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-num">1,6K</span>
+              <span class="p-stat-label">репостов</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-num">1,7K</span>
+              <span class="p-stat-label">сохранений</span>
+            </div>
+          </div>
+          <a href="https://vt.tiktok.com/ZSQU1vsbu/" target="_blank" class="portfolio-link">Смотреть видео →</a>
+        </div>
+      </div>
+
+      <!-- Katty Coffee -->
+      <div class="portfolio-card">
+        <img src="katty.jpg" alt="Katty Coffee" class="portfolio-img">
+        <div class="portfolio-body">
+          <div class="portfolio-meta">
+            <span class="portfolio-collab" style="background: #FFF3E0; color: #E65100;">Фото-обзор</span>
+            <span class="portfolio-date">2024</span>
+          </div>
+          <div class="portfolio-title">Katty Coffee — обзор в карточках</div>
+          <div class="portfolio-desc">
+            Обзор кофейни без видео — только карточки с фото и текстом. Доказывает: даже без видеосъёмки контент работает на полную, если подача правильная.
+          </div>
+          <div class="portfolio-stats">
+            <div class="p-stat">
+              <span class="p-stat-num">60K+</span>
+              <span class="p-stat-label">просмотров</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-num">2,2K</span>
+              <span class="p-stat-label">лайков</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-num">1,1K</span>
+              <span class="p-stat-label">сохранений</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-num">700</span>
+              <span class="p-stat-label">репостов</span>
+            </div>
+          </div>
+          <a href="https://vt.tiktok.com/ZSQUJ6j4p/" target="_blank" class="portfolio-link">Смотреть обзор →</a>
+        </div>
+      </div>
+
+      <!-- Яндекс Go -->
+      <div class="portfolio-card">
+        <img src="yandex_go.jpg" alt="Яндекс Go x FlipDay" class="portfolio-img">
+        <div class="portfolio-body">
+          <div class="portfolio-meta">
+            <span class="portfolio-collab">Коллаборация</span>
+            <span class="portfolio-date">2026</span>
+          </div>
+          <div class="portfolio-title">FlipDay × Яндекс Go</div>
+          <div class="portfolio-desc">
+            Партнёрство с Яндекс Go раздел «Еда» — наш промокод FLLIPDAY даёт скидку 18 Br и бесплатную доставку на первый заказ от 30 Br в любом заведении приложения. Аудитория активно пользуется и делится с друзьями.
+          </div>
+          <div class="portfolio-stats">
+            <div class="p-stat">
+              <span class="p-stat-num">18 Br</span>
+              <span class="p-stat-label">скидка</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-num">0 Br</span>
+              <span class="p-stat-label">доставка</span>
+            </div>
+            <div class="p-stat">
+              <span class="p-stat-num">30+ Br</span>
+              <span class="p-stat-label">мин. сумма</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="contact">
+    <div class="contact-label">Связаться с нами</div>
+    <h2 class="contact-title">Готовы обсудить<br>сотрудничество?</h2>
+    <p class="contact-sub">
+      Напишите в Telegram — расскажете о вашем месте, обсудим формат и согласуем дату.
+      Отвечаем быстро.
+    </p>
+    <div class="contact-buttons">
+      <a href="https://t.me/GEORG653" class="btn btn-primary" target="_blank">
+        Написать в Telegram →
+      </a>
+      <a href="https://www.tiktok.com/@fllipday" class="btn btn-ghost" target="_blank">
+        Наш TikTok
+      </a>
+      <a href="https://t.me/Flip_Day" class="btn btn-ghost" target="_blank">
+        Канал FlipDay
+      </a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>© FlipDay · Минск</span>
+    <span>Обзоры мест · Подборки · Реклама</span>
+  </div>
+
+</div>
+
+<script>
+  const header = document.getElementById('stickyHeader');
+  const topbar = document.querySelector('.topbar');
+  const observer = new IntersectionObserver(([entry]) => {
+    header.classList.toggle('visible', !entry.isIntersecting);
+  }, { threshold: 0 });
+  observer.observe(topbar);
+</script>
+</body>
+</html>
